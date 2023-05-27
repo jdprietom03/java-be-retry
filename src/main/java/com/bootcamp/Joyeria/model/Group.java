@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,16 +16,18 @@ import javax.persistence.*;
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @Entity
-@Table(name = "Student")
-public class Student {
+@Table(name = "Group")
+public class Group {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String name;
-    private String email;
+    private String subject;
 
-    @OneToOne
-    @JoinColumn(name = "result_id")
-    private Result result;
+    @ManyToOne
+    @JoinColumn(name="subject_id")
+    private Subject subjectId;
+
+    @OneToMany(mappedBy = "groupId")
+    private List<Exam> examList;
 }

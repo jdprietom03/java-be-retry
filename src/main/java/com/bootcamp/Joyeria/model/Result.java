@@ -15,16 +15,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 @Entity
-@Table(name = "Student")
-public class Student {
+@Table(name = "Result")
+public class Result {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String name;
-    private String email;
-
-    @OneToOne
-    @JoinColumn(name = "result_id")
-    private Result result;
+    private Double note;
+    private Boolean taller;
+    private Boolean monitoria;
+    @OneToOne(mappedBy = "result")
+    private Student student;
 }
